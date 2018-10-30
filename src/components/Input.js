@@ -1,4 +1,31 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
+
+
+const StyledForm = styled.form`
+    display:flex;
+    input, button {
+        padding:10px;
+        background:white;
+        border:1px solid #bbb;
+    }
+
+    input {
+        border-radius:5px 0px 0px 5px;
+        flex-grow:1;
+    }
+
+    button {
+        border-left: 0px;
+        border-radius:0px 5px 5px 0px;
+        outline:0px;
+        &:hover {
+            background:#eee;
+        }
+    }
+
+
+`
 
 class Search extends Component {
     constructor() {
@@ -25,7 +52,7 @@ class Search extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <StyledForm onSubmit={this.onSubmit}>
                 <input type="text" value={this.state.value} onChange={this.onChange} placeholder={this.props.children}
 />
                 <button type="submit">
@@ -35,7 +62,7 @@ class Search extends Component {
 
 
 
-            </form>
+            </StyledForm>
         );
     }
 }

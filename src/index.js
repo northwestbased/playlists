@@ -6,13 +6,21 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import playlistApp from './redux/reducers'
 import thunk from 'redux-thunk';
+import {loadState, saveState} from './redux/localstorage.js'
+
 
 
 
 const store = createStore(
     playlistApp,
-    applyMiddleware(thunk)
+    loadState(),
+    applyMiddleware(thunk)    
 );
+
+store.subscribe(() => {
+    saveState(store.getState());
+  });
+
 ReactDOM.render(
     <Provider store={store}>
         <App />

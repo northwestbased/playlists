@@ -2,13 +2,27 @@ import React from 'react';
 import styled from 'styled-components'
 
 import { connect } from "react-redux";
-import { openPlaylist, createPlaylist, deletePlaylist} from "../redux/actions.js";
+import { openPlaylist, createPlaylist, deletePlaylist } from "../redux/actions.js";
 import Input from './Input.js'
+import IconButton from './IconButton.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+
 
 const StyleDiv = styled.div`
     padding:10px;
-    background:#ddd;
     height:100%;
+`
+const SearchResult = styled.div`
+    margin-top:10px;
+    display:flex;
+    justify-content:space-between;
+    .bttn {
+        display:none;
+    }
+    &:hover .bttn {
+        display:block;
+    }
 `
 
 const PlaylistList = (props) => (
@@ -16,7 +30,10 @@ const PlaylistList = (props) => (
         <Input handleSubmit={props.createPlaylist}>Add A Playlist</Input>
 
         {props.playlists.map((p, i) => (
-            <div><div onClick={() => props.openPlaylist(i)}>{p.title}</div> <button onClick={() => props.deletePlaylist(i)}>DELETE</button></div>
+            <SearchResult>
+                <div onClick={() => props.openPlaylist(i)}>{p.title}</div>
+                <IconButton onClick={() => props.deletePlaylist(i)}><FontAwesomeIcon icon={faTimes} /></IconButton>
+            </SearchResult>
         ))}
 
     </StyleDiv>

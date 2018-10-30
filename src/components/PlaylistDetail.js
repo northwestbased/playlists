@@ -2,15 +2,17 @@ import React from 'react';
 import styled from 'styled-components'
 
 import { connect } from "react-redux";
-import { addVideo, playVideo, removeVideo } from "../redux/actions.js";
-import Input from './Input.js'
+import { addVideo, playVideo, removeVideo, addToQueue, nukeQueue } from "../redux/actions.js";
+import { faPlay, faTimes } from '@fortawesome/free-solid-svg-icons'
+import IconButton from './IconButton.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-/*const StyleDiv = styled.div`
-    padding:10px;
-    background:#ddd;
-    height:100%;
-`*/
 
+const Track = styled.div`
+    margin:2px 0px;
+    display:flex;
+    justify-content:space-between;
+`
 const PlaylistList = (props) => {
     if (props.playlist === undefined) {
         return ""
@@ -18,14 +20,19 @@ const PlaylistList = (props) => {
 
     return (
         <div>
-            {props.playlist.title}
-            <Input handleSubmit={(id) => props.addVideo({title:id, id}, props.openedPlaylist)}>Add A Youtube ID</Input>
-
+            <div>
+                {props.playlist.title}
+                <IconButton onClick={() => (props.nukeQueue() && props.addToQueue(props.playlist.tracks))}>
+                    <FontAwesomeIcon icon={faPlay} />
+                </IconButton>
+            </div>
             <div>
                 {props.playlist.tracks.map( (t, i) => (
-                    <div>
-                        <div onClick={() => props.playVideo(t.id)}>{t.title}</div><button onClick={() => props.removeVideo(i, props.openedPlaylist)}>Remove</button>
-                    </div>
+                    <Track>
+                        <div>{t.title}</div>
+                        <IconButton onClick={() => props.removeVideo(i, props.openedPlaylist)}><FontAwesomeIcon icon={faTimes} /></IconButton>
+
+                    </Track>
                 ))
                 }
             </div>
@@ -34,7 +41,7 @@ const PlaylistList = (props) => {
 }
 
 
-const mapDispatchToProps = { addVideo, playVideo, removeVideo };
+const mapDispatchToProps = { addVideo, playVideo, removeVideo, addToQueue, nukeQueue };
 
 export default connect(
     state => ({ playlist: state.playlists[state.openedPlaylist], openedPlaylist: state.openedPlaylist }),
