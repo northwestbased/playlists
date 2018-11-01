@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 
-import { connect } from "react-redux";
-import { removeFromQueue } from "../redux/actions.js";
-import Input from './Input.js'
 import YouTube from 'react-youtube';
 
 const EmbedContainer = styled.div`
@@ -54,9 +51,4 @@ class Player extends Component {
     }
 }
 
-const mapDispatchToProps = { removeFromQueue };
-
-export default connect(
-    state => ({ queue: state.queue }),
-    mapDispatchToProps
-)(Player);
+export default Player

@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components'
 
-import { connect } from "react-redux";
-import { openPlaylist, createPlaylist, deletePlaylist, playlistIsShown } from "../redux/actions.js";
 import Input from './Input.js'
 import IconButton from './IconButton.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-
 
 const StyleDiv = styled.div`
     padding:10px;
@@ -42,10 +39,4 @@ const PlaylistList = (props) => (
     </StyleDiv>
 )
 
-const mapDispatchToProps = { openPlaylist, createPlaylist, deletePlaylist, playlistIsShown };
-
-export default connect(
-    state => ({ playlists: state.playlists }),
-    mapDispatchToProps
-)(PlaylistList);
-
+export default PlaylistList

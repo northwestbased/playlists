@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import PlaylistList from './PlaylistList.js'
-import PlaylistDetail from './PlaylistDetail.js'
+import PlaylistList from '../containers/PlaylistListContainer.js'
 import Input from './Input.js'
-import Results from './SearchResults.js'
-import Player from './Player.js'
+import Player from '../containers/PlayerContainer.js'
+import Main from '../containers/MainContainer.js'
+
 import { connect } from "react-redux";
-import { addVideo, playVideo, openPlaylist, createPlaylist, fetchResults, playlistIsShown } from "../redux/actions.js";
+import { fetchResults, playlistIsShown } from "../redux/actions.js";
 import styled from 'styled-components'
 
 const AppDiv = styled.div`
   height:100%;
-  display:flex;
+  display:flex;M
 `
 const Gutter = styled.div`
   width:300px;
   border-right:1px solid #bbb;
   box-sizing:border-box;
 `
-const Main = styled.div`
+const MainD = styled.div`
   display: flex;
   flex-grow:1;
   flex-direction: column;
@@ -30,12 +30,6 @@ const Nav = styled.div`
     width:50%;
   }
 `
-const ContentDiv = styled.div`
-  flex: 1 1 auto;
-  position: relative;/* need this to position inner content */
-  overflow-y: auto;
-  margin:10px;
-`
 const Footer = styled.div`
   flex: 0 0 auto;
 `
@@ -47,31 +41,31 @@ class App extends Component {
         <Gutter>
           <PlaylistList />
         </Gutter>
-        <Main>
-          <Nav>
+        <MainD>
+          <Main>
             <div>
+              <div>
+
+              </div>
+              <div>
+                <Input 
+                  handleSubmit={(r) => { this.props.fetchResults(r) && this.props.playlistIsShown(false) }}>
+                  Search Youtube
+                </Input>
+              </div>
             </div>
-            <div>
-              <Input handleSubmit={(r) => {this.props.fetchResults(r) && this.props.playlistIsShown(false)}}>Search Youtube</Input>
-            </div>
-          </Nav>
-          <ContentDiv>
-            { this.props.state.playlistVisibility || console.log("props", this.props) ?
-            <PlaylistDetail />
-            : <Results />
-            }
-          </ContentDiv>
+          </Main>
           <Footer>
             <Player />
           </Footer>
-        </Main>
+        </MainD>
       </AppDiv>
     );
   }
 }
 
 
-const mapDispatchToProps = { addVideo, playVideo, openPlaylist, createPlaylist, fetchResults, playlistIsShown };
+const mapDispatchToProps = { fetchResults, playlistIsShown };
 
 export default connect(
   state => ({ state }),
