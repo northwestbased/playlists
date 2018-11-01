@@ -31,7 +31,6 @@ const Results = (props) => (
             </div>
             : ""
         }
-
     </div>
 )
 

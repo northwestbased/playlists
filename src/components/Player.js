@@ -21,10 +21,9 @@ const EmbedContainer = styled.div`
     }
 `
 
+const Bottom = styled.div`
 
-
-
-
+`
 
 
 class Player extends Component {
@@ -33,17 +32,24 @@ class Player extends Component {
     }
 
     render() {
+        if (this.props.queue === undefined || !this.props.queue.length) {
+            return ""
+        }
         return (
-            <div style={{"max-width":"300px"}}>
-            <EmbedContainer>
-                {this.props.queue !== undefined && this.props.queue.length ? (
-                    <YouTube
-                        videoId={this.props.queue[0].id}
-                        onEnd={() => (this.props.removeFromQueue() && this.forceUpdate())}
-                        opts={{ playerVars: { 'autoplay': 1 } }}
-                    />
-                ) : undefined}
-            </EmbedContainer></div>
+            <Bottom>
+                <div style={{ "max-width": "300px" }}>
+                    <EmbedContainer>
+                        <YouTube
+                            videoId={this.props.queue[0].id}
+                            onEnd={() => (this.props.removeFromQueue() && this.forceUpdate())}
+                            opts={{ playerVars: { 'autoplay': 1 } }}
+                        />
+                    </EmbedContainer>
+                </div>
+                <div>
+                    {this.props.queue[0].title}
+                </div>
+            </Bottom>
         )
     }
 }
@@ -54,4 +60,3 @@ export default connect(
     state => ({ queue: state.queue }),
     mapDispatchToProps
 )(Player);
-

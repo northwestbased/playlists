@@ -43,7 +43,7 @@ class Search extends Component {
         if (value.length) {
             this.props.handleSubmit(this.state.value)
         }
-        this.setState({value: ""})
+        this.setState({ value: "" })
     }
 
     onChange(event) {
@@ -53,15 +53,12 @@ class Search extends Component {
     render() {
         return (
             <StyledForm onSubmit={this.onSubmit}>
-                <input type="text" value={this.state.value} onChange={this.onChange} placeholder={this.props.children}
-/>
-                <button type="submit">
-                    +
-                </button>
-
-
-
-
+                <input type="text"
+                    value={this.state.value}
+                    onChange={this.onChange}
+                    placeholder={this.props.children}
+                />
+                <button type="submit">+</button>
             </StyledForm>
         );
     }

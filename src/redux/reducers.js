@@ -11,8 +11,10 @@ import {
     FETCH_VIDEOS_SUCCESS,
     ADD_TO_QUEUE,
     REMOVE_FROM_QUEUE,
-    NUKE_QUEUE
+    NUKE_QUEUE,
+    TOGGLE_PLAYLIST_VISIBILITY
 } from './actions'
+
 
 
 
@@ -60,7 +62,6 @@ function playlists(state = [], action) {
 function fetchVideos(state = {}, action) {
     switch (action.type) {
         case FETCH_VIDEOS_REQUEST:
-            console.log("request requested...")
             return state
         case FETCH_VIDEOS_SUCCESS:
             let results = action.results.items.map(r => ({ id: r.id.videoId, title: r.snippet.title, description: r.snippet.description }))
@@ -83,6 +84,7 @@ function playingVideo(state = "", action) {
 }
 
 function openPlaylist(state = null, action) {
+
     switch (action.type) {
         case OPEN_PLAYLIST:
             return action.playlistId
@@ -105,12 +107,21 @@ function queue(state = [], action) {
     }
 }
 
+function playlistVisibility(state = false, action) {
+
+    if (action.type === TOGGLE_PLAYLIST_VISIBILITY) {
+        return action.value
+    }
+    return state
+}
+
 const playlistApp = combineReducers({
     playlists: playlists,
     nowPlaying: playingVideo,
     openedPlaylist: openPlaylist,
     results: fetchVideos,
-    queue: queue
+    queue: queue,
+    playlistVisibility: playlistVisibility
 })
 
 export default playlistApp

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 
 import { connect } from "react-redux";
-import { openPlaylist, createPlaylist, deletePlaylist } from "../redux/actions.js";
+import { openPlaylist, createPlaylist, deletePlaylist, playlistIsShown } from "../redux/actions.js";
 import Input from './Input.js'
 import IconButton from './IconButton.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,7 +14,7 @@ const StyleDiv = styled.div`
     height:100%;
 `
 const SearchResult = styled.div`
-    margin-top:10px;
+    padding:5px;
     display:flex;
     justify-content:space-between;
     .bttn {
@@ -22,6 +22,9 @@ const SearchResult = styled.div`
     }
     &:hover .bttn {
         display:block;
+    }
+    > div {
+        flex-grow:1;
     }
 `
 
@@ -31,7 +34,7 @@ const PlaylistList = (props) => (
 
         {props.playlists.map((p, i) => (
             <SearchResult>
-                <div onClick={() => props.openPlaylist(i)}>{p.title}</div>
+                <div onClick={() => {props.openPlaylist(i) && props.playlistIsShown(true)}}>{p.title}</div>
                 <IconButton onClick={() => props.deletePlaylist(i)}><FontAwesomeIcon icon={faTimes} /></IconButton>
             </SearchResult>
         ))}
@@ -39,7 +42,7 @@ const PlaylistList = (props) => (
     </StyleDiv>
 )
 
-const mapDispatchToProps = { openPlaylist, createPlaylist, deletePlaylist };
+const mapDispatchToProps = { openPlaylist, createPlaylist, deletePlaylist, playlistIsShown };
 
 export default connect(
     state => ({ playlists: state.playlists }),

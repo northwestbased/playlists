@@ -12,6 +12,7 @@ export const FETCH_VIDEOS_SUCCESS = 'FETCH_VIDEOS_SUCCESS'
 export const ADD_TO_QUEUE = 'ADD_TO_QUEUE'
 export const REMOVE_FROM_QUEUE = 'REMOVE_FROM_QUEUE'
 export const NUKE_QUEUE = 'NUKE_QUEUE'
+export const TOGGLE_PLAYLIST_VISIBILITY = 'TOGGLE_PLAYLIST_VISIBILITY'
 
 export function nukeQueue() {
     return {
@@ -73,6 +74,13 @@ export function removeVideo(videoIndex, playlistId) {
         type: REMOVE_VIDEO,
         videoIndex,
         playlistId
+    }
+}
+
+export function playlistIsShown(bool) {
+    return {
+        type: TOGGLE_PLAYLIST_VISIBILITY,
+        value: bool
     }
 }
 
