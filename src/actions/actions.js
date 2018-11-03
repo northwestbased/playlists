@@ -9,33 +9,13 @@ export const REMOVE_VIDEO = 'REMOVE_VIDEO'
 export const FETCH_VIDEOS_REQUEST = 'FETCH_VIDEOS_REQUEST'
 export const FETCH_VIDEOS_FAILURE = 'FETCH_VIDEOS_FAILURE'
 export const FETCH_VIDEOS_SUCCESS = 'FETCH_VIDEOS_SUCCESS'
-export const ADD_TO_QUEUE = 'ADD_TO_QUEUE'
-export const REMOVE_FROM_QUEUE = 'REMOVE_FROM_QUEUE'
-export const NUKE_QUEUE = 'NUKE_QUEUE'
 export const TOGGLE_PLAYLIST_VISIBILITY = 'TOGGLE_PLAYLIST_VISIBILITY'
 
-export function nukeQueue() {
-    return {
-        type: NUKE_QUEUE
-    }
-}
 
-export function addToQueue(videoId) {
-    return {
-        type: ADD_TO_QUEUE,
-        videoId
-    }
-}
-export function removeFromQueue(videoId) {
-    return {
-        type: REMOVE_FROM_QUEUE,
-    }
-}
-
-export function playVideo(videoId) {
+export function playVideo(videos) {
     return {
         type: PLAY_VIDEO,
-        videoId
+        videos
     }
 }
 
@@ -93,7 +73,7 @@ export function fetchResults(keyword) {
       dispatch({
         type: 'FETCH_VIDEOS_REQUEST'
       });
-      const url = `${youtube_url}?key=${key}&part=snippet&q=${keyword}&maxResults=10&type=video`
+      const url = `${youtube_url}?key=${key}&part=snippet&q=${keyword}&maxResults=30&type=video`
       return fetch(url)
         .then(response => response.json().then(body => ({ response, body })))
         .then(({ response, body }) => {

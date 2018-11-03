@@ -1,0 +1,6 @@
+export const COLOR_PRIMARY = "#333"
+export const COLOR_SECONDARY = "#444"
+export const BORDER_COLOR = "#222"
+export const TEXT_COLOR = "#CCC"
+export const HOVER_TEXT_COLOR = "#888"
+export const SMALL_FONT = "0.9em;"

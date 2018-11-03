@@ -4,9 +4,31 @@ import './index.css';
 import App from './components/App';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import playlistApp from './redux/reducers'
+import playlistApp from './reducers/reducers'
 import thunk from 'redux-thunk';
-import {loadState, saveState} from './redux/localstorage.js'
+
+
+export const loadState = () => {
+    try {
+      const serializedState = localStorage.getItem('state');
+      if (serializedState === null) {
+        return undefined;
+      }
+      return JSON.parse(serializedState);
+    } catch (err) {
+      return undefined;
+    }
+  };
+
+  export const saveState = (state) => {
+    try {
+      const serializedState = JSON.stringify({"playlists": state.playlists});
+      localStorage.setItem('state', serializedState);
+    } catch (err) {
+      // Ignore write errors.
+    }
+  };
+
 
 
 

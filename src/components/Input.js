@@ -1,33 +1,22 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
-
+import styled from 'styled-components';
+import * as palette from './styleVariables.js';
 
 const StyledForm = styled.form`
     display:flex;
-    input, button {
-        padding:10px;
-        background:white;
-        border:1px solid #bbb;
-    }
-
-    input {
-        border-radius:5px 0px 0px 5px;
-        flex-grow:1;
-    }
-
     button {
-        border-left: 0px;
-        border-radius:0px 5px 5px 0px;
-        outline:0px;
-        &:hover {
-            background:#eee;
-        }
+        background: ${palette.COLOR_SECONDARY}
+        color: ${palette.TEXT_COLOR}
     }
 
-
+    button, input {
+        border:0px;
+        padding:10px;
+    }
 `
 
-class Search extends Component {
+
+class Input extends Component {
     constructor() {
         super()
         this.state = {
@@ -65,4 +54,4 @@ class Search extends Component {
 }
 
 
-export default Search
+export default Input

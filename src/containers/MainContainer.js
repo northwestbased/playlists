@@ -1,65 +1,42 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react';
-import { fetchResults, playlistIsShown, nukeQueue, addToQueue } from "../redux/actions.js";
+import { fetchResults, playlistIsShown, playVideo } from "../actions/actions.js";
 
 import PlaylistDetail from './PlaylistDetailContainer.js'
 import SearchResults from './SearchResultsContainer.js'
-import styled from 'styled-components'
 import Input from '../components/Input.js'
-import IconButton from '../components/IconButton.js'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import Player from '../containers/PlayerContainer.js'
+import styled from 'styled-components';
 
-
-const Newd = styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-    padding: 10px 10px 10px 0px;
+const Header = styled.div`
+    display:flex;
+    justify-content:end;
 `
 
-const ContentDiv = styled.div`
-  flex: 1 1 auto;
-  position: relative;/* need this to position inner content */
-  overflow-y: auto;
-  margin:10px;
-`
-
-const HeaderDiv = styled.div`
-    display: flex;
-    justify-content: space-between;
+const StyledMain = styled.div`
+    overflow-y:auto;
+    height:100%;
 `
 
 class Main extends Component {
     render() {
         return (
-            <ContentDiv>
-                <div>
-                    <HeaderDiv>
-                        {this.props.playlistVisibility ?
-                            (<Newd>
-                                {this.props.playlist.title}
-                                <IconButton onClick={() => (this.props.nukeQueue() && this.props.addToQueue(this.props.playlist.tracks))}>
-                                    <FontAwesomeIcon icon={faPlay} />
-                                </IconButton>
-                            </Newd>
-                            )
-                            : "Results"
-                        }
-                        <div>
-                            <Input
-                                handleSubmit={(r) => { this.props.fetchResults(r) && this.props.playlistIsShown(false) }}>
-                                Search Youtube
-                        </Input>
-                        </div>
-                    </HeaderDiv>
-
-                </div>
+            <StyledMain>
+                <Header>
+                    <Input
+                        handleSubmit={(r) => {
+                            this.props.fetchResults(r)
+                            this.props.playlistIsShown(false)
+                        }}
+                    >
+                        Search Youtube
+                    </Input>
+                </Header>
+                <Player />
                 {this.props.playlistVisibility ?
                     <PlaylistDetail />
-                    : <SearchResults />
-                }
-            </ContentDiv >
+                    : <SearchResults />}
+            </StyledMain >
         )
     }
 }
@@ -68,7 +45,7 @@ const mapStateToProps = state => ({
     playlistVisibility: state.playlistVisibility,
     playlist: state.playlists[state.openedPlaylist]
 })
-const mapDispatchToProps = { fetchResults, playlistIsShown, nukeQueue, addToQueue };
+const mapDispatchToProps = { fetchResults, playlistIsShown, playVideo };
 
 
 export default connect(

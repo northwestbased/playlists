@@ -9,14 +9,8 @@ import {
     FETCH_VIDEOS_REQUEST,
     FETCH_VIDEOS_FAILURE,
     FETCH_VIDEOS_SUCCESS,
-    ADD_TO_QUEUE,
-    REMOVE_FROM_QUEUE,
-    NUKE_QUEUE,
     TOGGLE_PLAYLIST_VISIBILITY
-} from './actions'
-
-
-
+} from '../actions/actions'
 
 function playlists(state = [], action) {
     switch (action.type) {
@@ -64,7 +58,15 @@ function fetchVideos(state = {}, action) {
         case FETCH_VIDEOS_REQUEST:
             return state
         case FETCH_VIDEOS_SUCCESS:
-            let results = action.results.items.map(r => ({ id: r.id.videoId, title: r.snippet.title, description: r.snippet.description }))
+            let results = action.results.items.map(r => (
+                {
+                    id: r.id.videoId,
+                    title: r.snippet.title,
+                    description: r.snippet.description,
+                    author: r.snippet.channelTitle,
+                    thumbnailUrl: r.snippet.thumbnails.default.url
+                }
+            ))
             return { ...state, results }
 
         case FETCH_VIDEOS_FAILURE:
@@ -74,34 +76,20 @@ function fetchVideos(state = {}, action) {
     }
 }
 
-function playingVideo(state = "", action) {
+function queue(state = [], action) {
     switch (action.type) {
         case PLAY_VIDEO:
-            return action.videoId
+            return action.videos
         default:
             return state
     }
 }
 
-function openPlaylist(state = null, action) {
+function openedPlaylist(state = null, action) {
 
     switch (action.type) {
         case OPEN_PLAYLIST:
             return action.playlistId
-        default:
-            return state
-    }
-}
-
-function queue(state = [], action) {
-    switch (action.type) {
-        case ADD_TO_QUEUE:
-            return [...state, ...action.videoId]
-        case REMOVE_FROM_QUEUE:
-            state.splice(0, 1)
-            return [...state]
-        case NUKE_QUEUE:
-            return []
         default:
             return state
     }
@@ -117,10 +105,9 @@ function playlistVisibility(state = false, action) {
 
 const playlistApp = combineReducers({
     playlists: playlists,
-    nowPlaying: playingVideo,
-    openedPlaylist: openPlaylist,
-    results: fetchVideos,
     queue: queue,
+    openedPlaylist,
+    results: fetchVideos,
     playlistVisibility: playlistVisibility
 })
 

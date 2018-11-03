@@ -1,35 +1,83 @@
 import React from 'react';
-import styled from 'styled-components'
+import PropTypes from 'prop-types';
+import IconButton from '../components/IconButton.js'
 
-import { faPlay, faTimes } from '@fortawesome/free-solid-svg-icons'
-import IconButton from './IconButton.js'
+import SimpleMenu from './dropdown.js'
+
+import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
+import styled from 'styled-components';
+
+import * as palette from './styleVariables.js';
+
 const Track = styled.div`
-    margin:2px 0px;
+    font-size:${palette.SMALL_FONT};
     display:flex;
-    justify-content:space-between;
+    padding:3px 0px;
+    border-top:1px solid ${palette.BORDER_COLOR};
+    align-items: center;    
+    justify-content: space-between;
+    &:nth-child(odd) {
+        background:${palette.COLOR_SECONDARY}
+    }
+    * {
+        font-size:${palette.SMALL_FONT};
+    }
+    > * {
+        margin:0px 3px;
+    }
+    
 `
+const Title = styled.div `
+    display:flex;
+    font-weight:bold;
+    justify-content:center;
+    margin-bottom:5px;
+`
+
+
 const PlaylistDetail = (props) => {
+
     if (props.playlist === undefined) {
         return ""
     }
 
     return (
         <div>
+            <Title><div>{props.playlist.title}</div>
+            <IconButton onClick={() => (props.playVideo(props.playlist.tracks))}>
+                <FontAwesomeIcon icon={faPlay} />
+            </IconButton>
+            </Title>
             <div>
-                {props.playlist.tracks.map( (t, i) => (
-                    <Track>
-                        <div>{t.title}</div>
-                        <IconButton onClick={() => props.removeVideo(i, props.openedPlaylist)}><FontAwesomeIcon icon={faTimes} /></IconButton>
-
-                    </Track>
-                ))
+                {
+                    props.playlist.tracks.map((track, i) => (
+                        <Track>
+                            <div onDoubleClick={() => (props.playVideo([track]))}>{track.title}</div>
+                            <div onDoubleClick={() => (props.playVideo([track]))}>{track.author}</div>
+                            <SimpleMenu options={
+                                [
+                                    {
+                                        title: "Remove Video",
+                                        handler: () => props.removeVideo(i, props.openedPlaylist)
+                                    },
+                                ]
+                            }
+                            />
+                        </Track>
+                    ))
                 }
             </div>
         </div>
     )
 }
+
+PlaylistDetail.propTypes = {
+    playlist: PropTypes.object.isRequired,
+    playVideo: PropTypes.func.isRequired,
+    removeVideo: PropTypes.func.isRequired
+};
 
 export default PlaylistDetail

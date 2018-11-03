@@ -1,42 +1,46 @@
 import React from 'react';
-import styled from 'styled-components'
 
 import Input from './Input.js'
 import IconButton from './IconButton.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components';
 
-const StyleDiv = styled.div`
-    padding:10px;
-    height:100%;
-`
-const SearchResult = styled.div`
-    padding:5px;
+import * as palette from './styleVariables.js';
+
+
+const PL = styled.div`
+    font-size:${palette.SMALL_FONT};
     display:flex;
-    justify-content:space-between;
-    .bttn {
-        display:none;
+    padding:3px 0px;
+    border-top:1px solid ${palette.BORDER_COLOR};
+    align-items: center;    
+    justify-content: space-between;
+    &:nth-child(odd) {
+        background:${palette.COLOR_SECONDARY}
     }
-    &:hover .bttn {
-        display:block;
+    * {
+        font-size:${palette.SMALL_FONT};
     }
-    > div {
-        flex-grow:1;
+    > * {
+        margin:0px 3px;
     }
+    
 `
 
-const PlaylistList = (props) => (
-    <StyleDiv>
+
+const PlaylistList = (props) => ( 
+    <div>
         <Input handleSubmit={props.createPlaylist}>Add A Playlist</Input>
 
         {props.playlists.map((p, i) => (
-            <SearchResult>
+            <PL>
                 <div onClick={() => {props.openPlaylist(i) && props.playlistIsShown(true)}}>{p.title}</div>
                 <IconButton onClick={() => props.deletePlaylist(i)}><FontAwesomeIcon icon={faTimes} /></IconButton>
-            </SearchResult>
+            </PL>
         ))}
 
-    </StyleDiv>
+    </div>
 )
 
 export default PlaylistList

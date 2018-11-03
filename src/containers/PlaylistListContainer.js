@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { openPlaylist, createPlaylist, deletePlaylist, playlistIsShown } from '../redux/actions.js'
+import { openPlaylist, createPlaylist, deletePlaylist, playlistIsShown } from '../actions/actions.js'
 import PlaylistList from '../components/PlaylistList.js'
 
 
