@@ -3,7 +3,7 @@ import React from 'react';
 import Input from './Input.js'
 import IconButton from './IconButton.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components';
 
 import * as palette from './styleVariables.js';
@@ -29,13 +29,16 @@ const PL = styled.div`
 `
 
 
-const PlaylistList = (props) => ( 
+const PlaylistList = (props) => (
     <div>
-        <Input handleSubmit={props.createPlaylist}>Add A Playlist</Input>
+        <Input handleSubmit={props.createPlaylist}>
+            Create Playlist
+            <FontAwesomeIcon icon={faPlus} />
+        </Input>
 
         {props.playlists.map((p, i) => (
             <PL>
-                <div onClick={() => {props.openPlaylist(i) && props.playlistIsShown(true)}}>{p.title}</div>
+                <div onClick={() => { props.openPlaylist(i) && props.playlistIsShown(true) }}>{p.title}</div>
                 <IconButton onClick={() => props.deletePlaylist(i)}><FontAwesomeIcon icon={faTimes} /></IconButton>
             </PL>
         ))}

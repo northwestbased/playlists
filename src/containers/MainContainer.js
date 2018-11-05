@@ -7,6 +7,10 @@ import SearchResults from './SearchResultsContainer.js'
 import Input from '../components/Input.js'
 import Player from '../containers/PlayerContainer.js'
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
+
 
 const Header = styled.div`
     display:flex;
@@ -30,6 +34,7 @@ class Main extends Component {
                         }}
                     >
                         Search Youtube
+                        <FontAwesomeIcon icon={faSearch} />
                     </Input>
                 </Header>
                 <Player />

@@ -13,6 +13,9 @@ const StyledForm = styled.form`
         border:0px;
         padding:10px;
     }
+    button:hover {
+        color:white;
+    }
 `
 
 
@@ -45,9 +48,9 @@ class Input extends Component {
                 <input type="text"
                     value={this.state.value}
                     onChange={this.onChange}
-                    placeholder={this.props.children}
+                    placeholder={this.props.children[0]}
                 />
-                <button type="submit">+</button>
+                <button type="submit">{this.props.children[1]}</button>
             </StyledForm>
         );
     }

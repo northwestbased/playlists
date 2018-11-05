@@ -1,8 +1,5 @@
 import React from 'react';
 
-import { faPlay } from '@fortawesome/free-solid-svg-icons'
-import IconButton from './IconButton.js'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from 'styled-components';
 
 import * as palette from './styleVariables.js';
@@ -26,6 +23,15 @@ const ResultsRow = styled.div`
     
 `
 
+const NothingDiv = styled.div`
+    height:100%;
+    display:flex;
+    height:90%;
+    justify-content: center;
+    align-items: center;
+    overflow:hidden;
+`
+
 const SearchResults = (props) => (
     props.results !== undefined ?
         <div>
@@ -44,7 +50,7 @@ const SearchResults = (props) => (
                 </ResultsRow>
             ))}
         </div>
-        : <div>Nothing Here</div>
+        : <NothingDiv><div>Nothing Here. Create a playlist and add videos by searching for them.</div></NothingDiv>
 )
 
 
