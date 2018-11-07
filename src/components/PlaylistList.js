@@ -25,6 +25,9 @@ const PL = styled.div`
     > * {
         margin:0px 3px;
     }
+    > div:first-child {
+        flex-grow:1;
+    }
     
 `
 
@@ -38,7 +41,12 @@ const PlaylistList = (props) => (
 
         {props.playlists.map((p, i) => (
             <PL>
-                <div onClick={() => { props.openPlaylist(i) && props.playlistIsShown(true) }}>{p.title}</div>
+                <div onClick={() => {
+                    props.openPlaylist(i)
+                    props.playlistIsShown(true)
+                }}>
+                    {p.title}
+                </div>
                 <IconButton onClick={() => props.deletePlaylist(i)}><FontAwesomeIcon icon={faTimes} /></IconButton>
             </PL>
         ))}

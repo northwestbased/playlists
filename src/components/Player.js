@@ -135,7 +135,6 @@ class Player extends Component {
                             <IconButton onClick={this.playNext}>
                                 <FontAwesomeIcon icon={faForward} />
                             </IconButton>
- 
                     </ButtonGroup>
                 </ControlsContainer>
             </PlayerContainer>

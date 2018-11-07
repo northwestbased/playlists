@@ -14,7 +14,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const Header = styled.div`
     display:flex;
-    justify-content:end;
+    justify-content:flex-end;
 `
 
 const StyledMain = styled.div`

@@ -3,7 +3,7 @@ import Player from '../components/Player.js'
 
 
 const mapStateToProps = state => ({
-    queue: state.queue
+    queue: state.queue.queue
 })
 
 const mapDispatchToProps = {  };

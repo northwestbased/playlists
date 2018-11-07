@@ -15,7 +15,7 @@ export const TOGGLE_PLAYLIST_VISIBILITY = 'TOGGLE_PLAYLIST_VISIBILITY'
 export function playVideo(videos) {
     return {
         type: PLAY_VIDEO,
-        videos
+        queue:videos
     }
 }
 
@@ -73,7 +73,7 @@ export function fetchResults(keyword) {
       dispatch({
         type: 'FETCH_VIDEOS_REQUEST'
       });
-      const url = `${youtube_url}?key=${key}&part=snippet&q=${keyword}&maxResults=30&type=video`
+      const url = `${youtube_url}?key=${key}&part=snippet&q=${keyword}&maxResults=30&type=video&videoEmbeddable=true`
       return fetch(url)
         .then(response => response.json().then(body => ({ response, body })))
         .then(({ response, body }) => {

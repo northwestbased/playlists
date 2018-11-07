@@ -19,6 +19,9 @@ const Track = styled.div`
     border-top:1px solid ${palette.BORDER_COLOR};
     align-items: center;    
     justify-content: space-between;
+    div:nth-child(1), div:nth-child(2) {
+        flex:2 1; 
+    }
     &:nth-child(odd) {
         background:${palette.COLOR_SECONDARY}
     }
