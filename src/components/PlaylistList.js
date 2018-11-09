@@ -47,7 +47,6 @@ const PlaylistList = (props) => (
                 }}>
                     {p.title}
                 </div>
-                <IconButton onClick={() => props.deletePlaylist(i)}><FontAwesomeIcon icon={faTimes} /></IconButton>
             </PL>
         ))}
 

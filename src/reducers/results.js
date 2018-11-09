@@ -15,7 +15,7 @@ import {
 export default function fetchVideos(state = {}, action) {
     switch (action.type) {
         case FETCH_VIDEOS_REQUEST:
-            return state
+            return { ...state, keyword: action.keyword }
         case FETCH_VIDEOS_SUCCESS:
             let results = action.results.items.map(r => (
                 {

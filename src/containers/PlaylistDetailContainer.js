@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { addVideo, playVideo, removeVideo } from "../actions/actions.js";
+import { addVideo, playVideo, removeVideo, deletePlaylist } from "../actions/actions.js";
 import PlaylistDetail from '../components/PlaylistDetail.js'
 
 
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 })
 
 
-const mapDispatchToProps = { addVideo, removeVideo, playVideo };
+const mapDispatchToProps = { addVideo, removeVideo, playVideo, deletePlaylist };
 
 export default connect(
     mapStateToProps,

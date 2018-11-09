@@ -6,7 +6,6 @@ import {
     DELETE_PLAYLIST,
     REMOVE_VIDEO,
 
-    OPEN_PLAYLIST //?
 } from '../actions/actions'
 
 export default function playlists(state = [], action) {

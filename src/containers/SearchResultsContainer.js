@@ -4,7 +4,7 @@ import SearchResults from '../components/SearchResults.js'
 
 
 const mapStateToProps = state => ({
-    results: state.results.results, playlists: state.playlists
+    results: state.results.results, playlists: state.playlists, keyword: state.results.keyword
 })
 
 

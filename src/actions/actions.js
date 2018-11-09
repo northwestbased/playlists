@@ -71,7 +71,8 @@ const key = 'AIzaSyCR7M6CQcjevymrItkF3cOdDgLSClKMeW0';
 export function fetchResults(keyword) {
     return function(dispatch) {
       dispatch({
-        type: 'FETCH_VIDEOS_REQUEST'
+        type: 'FETCH_VIDEOS_REQUEST',
+        keyword
       });
       const url = `${youtube_url}?key=${key}&part=snippet&q=${keyword}&maxResults=30&type=video&videoEmbeddable=true`
       return fetch(url)

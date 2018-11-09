@@ -4,7 +4,7 @@ import IconButton from '../components/IconButton.js'
 
 import SimpleMenu from './dropdown.js'
 
-import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
@@ -14,7 +14,7 @@ import * as palette from './styleVariables.js';
 
 const Track = styled.div`
     font-size:${palette.SMALL_FONT};
-    display:flex;
+    display:flex;  
     padding:3px 0px;
     border-top:1px solid ${palette.BORDER_COLOR};
     align-items: center;    
@@ -33,7 +33,7 @@ const Track = styled.div`
     }
     
 `
-const Title = styled.div `
+const Title = styled.div`
     display:flex;
     font-weight:bold;
     justify-content:center;
@@ -42,18 +42,13 @@ const Title = styled.div `
 
 
 const PlaylistDetail = (props) => {
-
     if (props.playlist === undefined) {
         return ""
     }
 
     return (
         <div>
-            <Title><div>{props.playlist.title}</div>
-            <IconButton onClick={() => (props.playVideo(props.playlist.tracks))}>
-                <FontAwesomeIcon icon={faPlay} />
-            </IconButton>
-            </Title>
+
             <div>
                 {
                     props.playlist.tracks.map((track, i) => (
